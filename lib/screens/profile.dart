@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:impact/models/user.dart';
+import 'package:intl/intl.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final User user;
+  const ProfileScreen({super.key, required this.user});
 
 
   @override
   Widget build(BuildContext context) {
 
     final ThemeData theme = Theme.of(context);
+    // final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
 
-    return Scaffold(
+ return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -28,12 +32,12 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     const CircleAvatar(
                       radius: 50.0,
-                      backgroundImage: NetworkImage('https://via.placeholder.com/150'), // Placeholder image
+                      backgroundImage: NetworkImage('https://placehold.co/400.png'), // Placeholder image
                       backgroundColor: Colors.transparent,
                     ),
                     const SizedBox(height: 16.0),
                     Text(
-                      'Nombre del Usuario', // Placeholder name
+                      '${user.name} ${user.lastName}', // Usa los datos del User
                       style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: theme.colorScheme.primary),
                     ),
                   ],
@@ -58,17 +62,29 @@ class ProfileScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Email: usuario@example.com', // Placeholder data
+                      'Email: ${user.email}', // Usa los datos del User
                       style: TextStyle(color: theme.colorScheme.primary),
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Teléfono: +1234567890', // Placeholder data
+                      'Nombre de usuario: ${user.username}', // Usa los datos del User
                       style: TextStyle(color: theme.colorScheme.primary),
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      'Miembro desde: Enero 2023', // Placeholder data
+                      'Miembro desde: ${user.joinDate}', // Usa y formatea los datos del User
+                      style: TextStyle(color: theme.colorScheme.primary),
+                    ),
+                    if (user.birthDate != null) ...[ // Muestra la fecha de nacimiento si está disponible
+                      const SizedBox(height: 8.0),
+                      Text(
+                        'Fecha de nacimiento: ${(user.birthDate!)}',
+                        style: TextStyle(color: theme.colorScheme.primary),
+                      ),
+                    ],
+                    const SizedBox(height: 8.0),
+                    Text(
+                      'Premium: ${user.isPremium ? "Sí" : "No"}', // Usa los datos del User
                       style: TextStyle(color: theme.colorScheme.primary),
                     ),
                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:impact/models/user.dart';
 import 'package:impact/screens/bookings.dart';
 import 'package:impact/screens/dashboard.dart';
 import 'package:impact/screens/profile.dart';
@@ -13,10 +14,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0; 
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  final currentUser = User(
+  name: 'Juan',
+  lastName: 'Pérez',
+  username: 'juanperez',
+  email: 'juan.perez@example.com',
+  joinDate: DateTime(2023, 1, 15),
+  isPremium: true,
+  birthDate: DateTime(1990, 5, 20),
+);
+
+  late final List<Widget> _widgetOptions = <Widget>[
     DashboardScreen(),
     BookingsScreen(),
-    ProfileScreen(),
+    ProfileScreen(user: currentUser),
   ];
 
   void _onItemTapped(int index) {

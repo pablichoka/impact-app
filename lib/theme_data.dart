@@ -38,7 +38,7 @@ final ThemeData darkThemeData = ThemeData(
     surface: Color.fromRGBO(0, 0, 0, 1), 
     onSurface: Colors.white, 
     surfaceContainerHighest: Color.fromRGBO(33, 33, 33, 1), 
-    onSurfaceVariant: Color.fromARGB(255, 180, 180, 180), 
+    onSurfaceVariant: Color.fromARGB(255, 102, 102, 102), 
     tertiary: Color.fromARGB(255, 255, 255, 255),
     onTertiary: Colors.black,
   ),
