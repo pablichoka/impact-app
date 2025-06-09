@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:impact/screens/init.dart';
 import 'package:impact/screens/home.dart';
 import 'package:impact/theme_data.dart';
+import 'package:intl/date_symbol_data_file.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await initializeDateFormatting('es', null);
   runApp(const MyApp());
 }
 
