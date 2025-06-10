@@ -1,6 +1,8 @@
 name: Release APK
 
 on:
+  push:
+    branches: [ "main" ]
   pull_request:
     types: [closed]
     branches: [ "main" ] # O "master" si tu rama se llama así
