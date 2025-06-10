@@ -4,12 +4,12 @@ on:
   push:
     branches: [ "main" ]
   pull_request:
-    #types: [closed]
-    branches: [ "main" ] # O "master" si tu rama se llama así
+    types: [closed]
+    branches: [ "main" ]
 
 jobs:
   build-and-release:
-    if: github.event.pull_request.merged == true
+    #if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
