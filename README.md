@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/pablichoka/impact-app/badge)](https://www.codefactor.io/repository/github/pablichoka/impact-app)
+
 # impact
 
 A new Flutter project.
