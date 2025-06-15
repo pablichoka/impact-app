@@ -6,14 +6,12 @@ class ProfileScreen extends StatelessWidget {
   final User user;
   const ProfileScreen({super.key, required this.user});
 
-
   @override
   Widget build(BuildContext context) {
-
     final ThemeData theme = Theme.of(context);
     // final DateFormat dateFormat = DateFormat('dd/MM/yyyy');
 
- return Scaffold(
+    return Scaffold(
       backgroundColor: theme.colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -32,13 +30,16 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     const CircleAvatar(
                       radius: 50.0,
-                      backgroundImage: NetworkImage('https://placehold.co/400.png'), // Placeholder image
+                      backgroundImage: NetworkImage(
+                        'https://placehold.co/400.png',
+                      ), // Placeholder image
                       backgroundColor: Colors.transparent,
                     ),
                     const SizedBox(height: 16.0),
                     Text(
                       '${user.name} ${user.lastName}', // Usa los datos del User
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(color: theme.colorScheme.primary),
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(color: theme.colorScheme.primary),
                     ),
                   ],
                 ),
@@ -58,7 +59,9 @@ class ProfileScreen extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       'Otros Datos del Perfil:',
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: theme.colorScheme.primary),
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        color: theme.colorScheme.primary,
+                      ),
                     ),
                     const SizedBox(height: 8.0),
                     Text(
@@ -75,7 +78,8 @@ class ProfileScreen extends StatelessWidget {
                       'Miembro desde: ${user.joinDate}', // Usa y formatea los datos del User
                       style: TextStyle(color: theme.colorScheme.primary),
                     ),
-                    if (user.birthDate != null) ...[ // Muestra la fecha de nacimiento si está disponible
+                    if (user.birthDate != null) ...[
+                      // Muestra la fecha de nacimiento si está disponible
                       const SizedBox(height: 8.0),
                       Text(
                         'Fecha de nacimiento: ${(user.birthDate!)}',
@@ -97,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  ElevatedButton.icon(                    
+                  ElevatedButton.icon(
                     icon: const Icon(Icons.edit),
                     label: const Text('Editar'),
                     onPressed: () {
@@ -105,8 +109,13 @@ class ProfileScreen extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: theme.colorScheme.secondary,
-                      foregroundColor: theme.colorScheme.primary, // Changed text and icon color
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),                
+                      foregroundColor: theme
+                          .colorScheme
+                          .primary, // Changed text and icon color
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                   ),
                   ElevatedButton.icon(
@@ -114,12 +123,20 @@ class ProfileScreen extends StatelessWidget {
                     label: const Text('Cerrar Sesión'),
                     onPressed: () {
                       // TODO: Implementar lógica de cierre de sesión
-                      Navigator.pushReplacementNamed(context, '/init'); // Navigate to InitScreen
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/init',
+                      ); // Navigate to InitScreen
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.redAccent,
-                      foregroundColor: theme.colorScheme.primary, // Changed text and icon color
-                      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      foregroundColor: theme
+                          .colorScheme
+                          .primary, // Changed text and icon color
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
                     ),
                   ),
                 ],

@@ -10,32 +10,39 @@ class DashboardScreen extends StatelessWidget {
   final List<Map<String, String>> announcements = const [
     {
       "title": "¡Mantenimiento Programado!",
-      "content": "El sistema estará en mantenimiento el próximo sábado de 02:00 a 04:00 AM.",
-      "date": "10 de junio de 2025"
+      "content":
+          "El sistema estará en mantenimiento el próximo sábado de 02:00 a 04:00 AM.",
+      "date": "10 de junio de 2025",
     },
     {
       "title": "Nuevas Funcionalidades Disponibles",
-      "content": "Hemos lanzado una actualización con nuevas herramientas para mejorar tu experiencia.",
-      "date": "5 de junio de 2025"
+      "content":
+          "Hemos lanzado una actualización con nuevas herramientas para mejorar tu experiencia.",
+      "date": "5 de junio de 2025",
     },
     {
       "title": "Oferta Especial de Verano",
-      "content": "¡Aprovecha un 20% de descuento en todos los planes hasta fin de mes!",
-      "date": "1 de junio de 2025"
-    },{
+      "content":
+          "¡Aprovecha un 20% de descuento en todos los planes hasta fin de mes!",
+      "date": "1 de junio de 2025",
+    },
+    {
       "title": "¡Mantenimiento Programado!",
-      "content": "El sistema estará en mantenimiento el próximo sábado de 02:00 a 04:00 AM.",
-      "date": "10 de junio de 2025"
+      "content":
+          "El sistema estará en mantenimiento el próximo sábado de 02:00 a 04:00 AM.",
+      "date": "10 de junio de 2025",
     },
     {
       "title": "Nuevas Funcionalidades Disponibles",
-      "content": "Hemos lanzado una actualización con nuevas herramientas para mejorar tu experiencia.",
-      "date": "5 de junio de 2025"
+      "content":
+          "Hemos lanzado una actualización con nuevas herramientas para mejorar tu experiencia.",
+      "date": "5 de junio de 2025",
     },
     {
       "title": "Oferta Especial de Verano",
-      "content": "¡Aprovecha un 20% de descuento en todos los planes hasta fin de mes!",
-      "date": "1 de junio de 2025"
+      "content":
+          "¡Aprovecha un 20% de descuento en todos los planes hasta fin de mes!",
+      "date": "1 de junio de 2025",
     },
   ];
 
@@ -45,10 +52,13 @@ class DashboardScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,
-      body: Padding( // Añadimos Padding aquí para todo el contenido
+      body: Padding(
+        // Añadimos Padding aquí para todo el contenido
         padding: const EdgeInsets.all(16.0),
-        child: Column( // Usamos Column como el widget principal del body
-          crossAxisAlignment: CrossAxisAlignment.start, // Para alinear el texto de bienvenida a la izquierda
+        child: Column(
+          // Usamos Column como el widget principal del body
+          crossAxisAlignment: CrossAxisAlignment
+              .start, // Para alinear el texto de bienvenida a la izquierda
           children: <Widget>[
             Text(
               '¡Bienvenido de nuevo, $userName!',
@@ -73,7 +83,9 @@ class DashboardScreen extends StatelessWidget {
                     Text(
                       'Tu Resumen',
                       style: theme.textTheme.titleLarge?.copyWith(
-                        color: theme.colorScheme.onSecondary, // Ajustado para contraste con 'secondary'
+                        color: theme
+                            .colorScheme
+                            .onSecondary, // Ajustado para contraste con 'secondary'
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -83,7 +95,9 @@ class DashboardScreen extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Créditos Restantes:',
-                          style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSecondary),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onSecondary,
+                          ),
                         ),
                         Text(
                           '$remainingCredits',
@@ -100,11 +114,15 @@ class DashboardScreen extends StatelessWidget {
                       children: <Widget>[
                         Text(
                           'Otros Datos:',
-                           style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSecondary),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onSecondary,
+                          ),
                         ),
                         Text(
                           otherData,
-                          style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.onSecondary),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: theme.colorScheme.onSecondary,
+                          ),
                         ),
                       ],
                     ),
@@ -123,27 +141,33 @@ class DashboardScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16.0),
-            Expanded( // Expanded permite que ListView.builder ocupe el espacio restante y sea scrollable
+            Expanded(
+              // Expanded permite que ListView.builder ocupe el espacio restante y sea scrollable
               child: announcements.isEmpty
                   ? Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20.0),
                         child: Text(
                           'No hay anuncios por el momento.',
-                          style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            color: theme.colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
                     )
                   : ListView.builder(
-                      physics: const BouncingScrollPhysics(), // Puedes mantener esto si te gusta el efecto
+                      physics:
+                          const BouncingScrollPhysics(), // Puedes mantener esto si te gusta el efecto
                       itemCount: announcements.length,
                       itemBuilder: (context, index) {
                         final announcement = announcements[index];
                         return Card(
                           elevation: 2.0,
                           margin: const EdgeInsets.only(bottom: 16.0),
-                          color: theme.colorScheme.surfaceContainerHighest, // Usar un color de tarjeta del tema
-                           shape: RoundedRectangleBorder(
+                          color: theme
+                              .colorScheme
+                              .surfaceContainerHighest, // Usar un color de tarjeta del tema
+                          shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: ListTile(
@@ -151,14 +175,16 @@ class DashboardScreen extends StatelessWidget {
                               announcement['title']!,
                               style: theme.textTheme.titleMedium?.copyWith(
                                 color: theme.colorScheme.onSurface,
-                                fontWeight: FontWeight.w600
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                             subtitle: Padding(
                               padding: const EdgeInsets.only(top: 4.0),
                               child: Text(
                                 "${announcement['content']!}\n${announcement['date']!}",
-                                style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.onSurfaceVariant),
+                                style: theme.textTheme.bodyMedium?.copyWith(
+                                  color: theme.colorScheme.onSurfaceVariant,
+                                ),
                               ),
                             ),
                             isThreeLine: true,

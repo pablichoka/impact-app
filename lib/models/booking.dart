@@ -5,9 +5,5 @@ class Booking {
   DateTime endTime;
   User user;
 
-  Booking({
-    required this.startTime,
-    required this.endTime,
-    required this.user,
-  });
+  Booking({required this.startTime, required this.endTime, required this.user});
 }

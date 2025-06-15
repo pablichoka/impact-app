@@ -21,7 +21,6 @@ class _BookingsScreenState extends State<BookingsScreen> {
   List<DateTime> _bookingDates = [];
   bool _isTouched = false;
 
-
   @override
   void initState() {
     super.initState();
@@ -29,7 +28,14 @@ class _BookingsScreenState extends State<BookingsScreen> {
     _loadUserBookings(_focusedDay);
   }
 
-  User placeholderUser = User(name: 'John', lastName: 'Doe', username: 'johndoe', email: 'johndoe@example.com', joinDate: DateTime.now(), isPremium: true);
+  User placeholderUser = User(
+    name: 'John',
+    lastName: 'Doe',
+    username: 'johndoe',
+    email: 'johndoe@example.com',
+    joinDate: DateTime.now(),
+    isPremium: true,
+  );
 
   void _loadUserBookings(DateTime date) {
     setState(() {
@@ -42,15 +48,23 @@ class _BookingsScreenState extends State<BookingsScreen> {
 
       DateTime currentDate = startDate;
 
-      while (currentDate.isBefore(endDate) || currentDate.isAtSameMomentAs(endDate)) {
+      while (currentDate.isBefore(endDate) ||
+          currentDate.isAtSameMomentAs(endDate)) {
         // check if the current day is Monday, Wednesday, or Friday
         if (currentDate.weekday == DateTime.monday ||
             currentDate.weekday == DateTime.wednesday ||
             currentDate.weekday == DateTime.friday) {
-          
           // create a placeholder start and end time for the booking
-          final startTime = DateTime(currentDate.year, currentDate.month, currentDate.day, 9, 0); // 9:00 AM
-          final endTime = startTime.add(const Duration(hours: 1)); // 1 hour duration
+          final startTime = DateTime(
+            currentDate.year,
+            currentDate.month,
+            currentDate.day,
+            9,
+            0,
+          ); // 9:00 AM
+          final endTime = startTime.add(
+            const Duration(hours: 1),
+          ); // 1 hour duration
 
           final booking = Booking(
             startTime: startTime,
@@ -58,20 +72,26 @@ class _BookingsScreenState extends State<BookingsScreen> {
             user: placeholderUser,
           );
           newBookings.add(booking);
-          newBookingDates.add(DateTime.utc(startTime.year, startTime.month, startTime.day));
+          newBookingDates.add(
+            DateTime.utc(startTime.year, startTime.month, startTime.day),
+          );
         }
         // move to the next day
         currentDate = currentDate.add(const Duration(days: 1));
       }
 
       _userBookings = newBookings;
-      _bookingDates = newBookingDates.toSet().toList(); // ensure unique dates for calendar markers
+      _bookingDates = newBookingDates
+          .toSet()
+          .toList(); // ensure unique dates for calendar markers
     });
   }
 
   List<dynamic> _getEventsForDay(DateTime day) {
     final normalizedDay = DateTime.utc(day.year, day.month, day.day);
-    return _bookingDates.where((bookingDate) => isSameDay(bookingDate, normalizedDay)).toList();
+    return _bookingDates
+        .where((bookingDate) => isSameDay(bookingDate, normalizedDay))
+        .toList();
   }
 
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
@@ -97,15 +117,22 @@ class _BookingsScreenState extends State<BookingsScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     final ThemeData theme = Theme.of(context);
 
-  List<Booking> bookingsForSelectedDay = [];
+    List<Booking> bookingsForSelectedDay = [];
     // filter bookings for the selected day
     if (_selectedDay != null) {
       bookingsForSelectedDay = _userBookings.where((booking) {
-        final bookingDate = DateTime.utc(booking.startTime.year, booking.startTime.month, booking.startTime.day);
-        final selectedDate = DateTime.utc(_selectedDay!.year, _selectedDay!.month, _selectedDay!.day);
+        final bookingDate = DateTime.utc(
+          booking.startTime.year,
+          booking.startTime.month,
+          booking.startTime.day,
+        );
+        final selectedDate = DateTime.utc(
+          _selectedDay!.year,
+          _selectedDay!.month,
+          _selectedDay!.day,
+        );
         return isSameDay(bookingDate, selectedDate);
       }).toList();
     }
@@ -153,52 +180,72 @@ class _BookingsScreenState extends State<BookingsScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              !_isTouched ? 'Todas las reservas programadas' : (_selectedDay != null ? 'Reservas para ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}' : 'Selecciona un día'),
-              style: theme.textTheme.headlineSmall?.copyWith(color: theme.colorScheme.tertiary),
+              !_isTouched
+                  ? 'Todas las reservas programadas'
+                  : (_selectedDay != null
+                        ? 'Reservas para ${_selectedDay!.day}/${_selectedDay!.month}/${_selectedDay!.year}'
+                        : 'Selecciona un día'),
+              style: theme.textTheme.headlineSmall?.copyWith(
+                color: theme.colorScheme.tertiary,
+              ),
             ),
           ),
           Expanded(
             child: _selectedDay == null
-                ? const Center(child: Text('Por favor, selecciona un día para ver las reservas.'))
+                ? const Center(
+                    child: Text(
+                      'Por favor, selecciona un día para ver las reservas.',
+                    ),
+                  )
                 : bookingsForSelectedDay.isEmpty
-                    ? const Center(child: Text('Aún no hay reservas para este día.'))
-                    : SingleChildScrollView( // allows scrolling if there are many cards for a single day
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: bookingsForSelectedDay.map((booking) {
-                            return Card(
-                              margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-                              color: theme.colorScheme.secondary,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Reserva - Usuario: ${booking.user.name}',
-                                      style: TextStyle(
-                                        color: theme.colorScheme.onSecondary,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Text(
-                                      'Hora de inicio: ${booking.startTime}',
-                                      style: TextStyle(color: theme.colorScheme.onSecondary),
-                                    ),
-                                    Text(
-                                      'Hora de fin: ${booking.endTime}',
-                                      style: TextStyle(color: theme.colorScheme.onSecondary),
-                                    ),
-                                    // you can add more details from the booking object here
-                                  ],
+                ? const Center(
+                    child: Text('Aún no hay reservas para este día.'),
+                  )
+                : SingleChildScrollView(
+                    // allows scrolling if there are many cards for a single day
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: bookingsForSelectedDay.map((booking) {
+                        return Card(
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8.0,
+                          ),
+                          color: theme.colorScheme.secondary,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Reserva - Usuario: ${booking.user.name}',
+                                  style: TextStyle(
+                                    color: theme.colorScheme.onSecondary,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
                                 ),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                      ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  'Hora de inicio: ${booking.startTime}',
+                                  style: TextStyle(
+                                    color: theme.colorScheme.onSecondary,
+                                  ),
+                                ),
+                                Text(
+                                  'Hora de fin: ${booking.endTime}',
+                                  style: TextStyle(
+                                    color: theme.colorScheme.onSecondary,
+                                  ),
+                                ),
+                                // you can add more details from the booking object here
+                              ],
+                            ),
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ),
           ),
         ],
       ),
