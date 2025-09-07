@@ -112,9 +112,9 @@ class ProfileScreen extends StatelessWidget {
                   ElevatedButton.icon(
                     icon: const Icon(Icons.logout),
                     label: const Text('Cerrar Sesión'),
-                    onPressed: () {
-                      // TODO: Implementar lógica de cierre de sesión
-                      Navigator.pushReplacementNamed(context, '/init'); // Navigate to InitScreen
+                    onPressed: () async {
+                      // TODO: call firebase auth signOut when integrated
+                      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.redAccent,
