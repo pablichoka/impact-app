@@ -57,13 +57,13 @@ class DashboardScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),            
 
             Card(
               elevation: 4.0,
               color: theme.colorScheme.secondary,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.0),
+                borderRadius: BorderRadius.circular(8.0),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
